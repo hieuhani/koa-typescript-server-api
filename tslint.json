@@ -15,6 +15,7 @@
             "check-open-brace",
             "check-whitespace"
         ],
+        "no-bitwise": false,
         "object-literal-sort-keys": [
             false
         ],
