@@ -4,6 +4,8 @@
         "target": "es2017",
         "noImplicitAny": true,
         "outDir": "./dist",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "sourceMap": true
     },
     "include": [
