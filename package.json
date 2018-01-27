@@ -11,16 +11,24 @@
     "dev": "cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' src/server.ts"
   },
   "dependencies": {
+    "apollo-server-koa": "^1.3.2",
+    "bunyan": "^1.8.12",
+    "class-validator": "^0.8.1",
     "dotenv": "^4.0.0",
+    "graphql-tools": "^2.19.0",
+    "graphql-tools-types": "^1.1.13",
+    "jsonwebtoken": "^8.1.1",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.3.0",
     "lodash": "^4.17.4",
+    "merge-graphql-schemas": "^1.4.0",
     "pg": "^7.4.1",
     "reflect-metadata": "^0.1.12",
     "typeorm": "^0.1.11"
   },
   "devDependencies": {
+    "@types/bunyan": "^1.8.4",
     "@types/koa": "^2.0.43",
     "@types/koa-bodyparser": "^4.2.0",
     "@types/koa-router": "^7.0.27",
