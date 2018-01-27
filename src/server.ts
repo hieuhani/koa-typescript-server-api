@@ -5,8 +5,10 @@ import * as bodyParser from 'koa-bodyparser'
 import * as Router from 'koa-router'
 import 'reflect-metadata'
 import { createConnection } from 'typeorm'
+import { AppContext } from './types'
 
 import config from './config'
+import getControllers from './controllers'
 import graphQLSchema from './graphql/schema'
 import logger from './libs/logger'
 
@@ -15,11 +17,13 @@ createConnection(config.database).then(async (connection) => {
   const router = new Router()
   app.use(bodyParser())
 
-  router.get('/', (ctx: Context) => {
-    ctx.body = 'Hello world'
-  })
-
-  router.post('/graphql', graphqlKoa({ schema: graphQLSchema }));
+  const context: AppContext = {
+    controllers: getControllers(),
+  }
+  router.post('/graphql', graphqlKoa({
+    schema: graphQLSchema,
+    context,
+  }));
   router.get(
     '/graphiql',
     graphiqlKoa({

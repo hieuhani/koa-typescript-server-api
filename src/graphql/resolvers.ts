@@ -1,7 +1,8 @@
 import * as GraphQLToolsTypes from 'graphql-tools-types'
 import { mergeResolvers } from 'merge-graphql-schemas'
+import authResolvers from './auth/resolvers'
 
-const rootResolvers = {
+const rootResolver = {
   Date: GraphQLToolsTypes.Date({ name: 'Date' }),
 }
 
@@ -13,6 +14,10 @@ const helloResolver = {
   },
 }
 
-const resolvers = [helloResolver]
+const resolvers = [
+  rootResolver,
+  helloResolver,
+  authResolvers,
+]
 
 export default mergeResolvers(resolvers)
