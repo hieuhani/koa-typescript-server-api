@@ -5,32 +5,21 @@ import * as bodyParser from 'koa-bodyparser'
 import * as Router from 'koa-router'
 import 'reflect-metadata'
 import { createConnection } from 'typeorm'
-import AppCache from './cache'
-import { AppContext } from './types'
-
 import config from './config'
-import getControllers from './controllers'
 import graphQLSchema from './graphql/schema'
 import logger from './libs/logger'
-import getRepositories from './repositories'
+import { injectContext, validateToken } from './middlewares'
 
 createConnection(config.database).then(async (connection) => {
   const app = new Koa()
   const router = new Router()
   app.use(bodyParser())
-
-  app.use(async (ctx, next) => {
-    const appContext: AppContext = {
-      repositories: getRepositories(),
-      controllers: getControllers(),
-    }
-    AppCache.put('context', appContext)
-    await next()
-  })
+  app.use(injectContext)
+  app.use(validateToken)
 
   router.post('/graphql', graphqlKoa((ctx) => ({
     schema: graphQLSchema,
-    context: AppCache.get('context'),
+    context: ctx.state.appContext,
   })))
 
   router.get(

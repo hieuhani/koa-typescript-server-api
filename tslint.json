@@ -20,9 +20,6 @@
             false
         ],
         "no-string-literal": false,
-        "triple-equals": [
-            false
-        ],
         "interface-name": false
     },
     "rulesDirectory": []

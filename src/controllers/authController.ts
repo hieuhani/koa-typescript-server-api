@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs'
-import { sign } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
 import * as validator from 'validator'
 import config from '../config'
 import logger from '../libs/logger'
@@ -78,6 +78,16 @@ export default class AuthController extends BaseController {
 
     return {
       token: signedToken,
+    }
+  }
+
+  public verifyToken(jwtToken: string) {
+    try {
+      const decodedToken = verify(jwtToken, config.jwtSecret) as JwtToken
+      const userRepository = this.appContext.repositories.user
+      return userRepository.findOneById(decodedToken.userId)
+    } catch (err) {
+      throw err
     }
   }
 }
