@@ -2,13 +2,37 @@ import * as bcrypt from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import * as validator from 'validator'
 import config from '../config'
+import logger from '../libs/logger'
 import { ContactType, JwtToken, SignInBody, SignInPayload, SignUpPayload } from '../types'
 import BaseController from './baseController'
 
 export default class AuthController extends BaseController {
-  public signIn(payload: SignInPayload): SignInBody {
+  public async signIn(payload: SignInPayload): Promise<SignInBody> {
+    const currentContact = await this.appContext.repositories.contact.findOne({
+      where: {
+        contact: payload.account,
+      },
+      relations: ['user'],
+    })
+    if (!currentContact) {
+      throw new Error('The contact is not found')
+    }
+    if (!currentContact.user) {
+      logger.error(`The contact ID ${currentContact.id} does not associate with any user.`)
+      throw new Error('The user that is associated with the contact is not found')
+    }
+    const isPasswordCorrect = await bcrypt.compare(payload.password, currentContact.user.passwordHash)
+    if (!isPasswordCorrect) {
+      throw new Error('Wrong password')
+    }
+    const tokenPayload: JwtToken = {
+      userId: currentContact.user.id,
+      contactId: currentContact.id,
+    }
+    const signedToken = sign(tokenPayload, config.jwtSecret)
+
     return {
-      token: 'handle sign in token here',
+      token: signedToken,
     }
   }
 

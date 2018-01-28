@@ -18,8 +18,13 @@ input SignUpPayload {
   type: ContactType,
 }
 
+input SignInPayload {
+  account: String!,
+  password: String!,
+}
+
 type AuthMutations {
-  signIn(account: String!, password: String!): SignInBody
+  signIn(payload: SignInPayload!): SignInBody
   signUp(payload: SignUpPayload!): SignInBody
 }
 `

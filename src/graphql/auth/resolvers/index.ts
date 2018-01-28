@@ -4,7 +4,7 @@ const authResolvers = {
   Mutation: {
     auth: () => {
       return {
-        signIn: (payload: SignInPayload, context: AppContext): SignInBody => {
+        signIn: ({ payload }: { payload: SignInPayload }, context: AppContext): Promise<SignInBody> => {
           return context.controllers.auth.signIn(payload)
         },
         signUp: ({ payload }: { payload: SignUpPayload }, context: AppContext): Promise<SignInBody> => {
