@@ -1,4 +1,4 @@
-import { AppContext, SignInBody, SignInPayload } from '../../../types'
+import { AppContext, SignInBody, SignInPayload, SignUpPayload } from '../../../types'
 
 const authResolvers = {
   Mutation: {
@@ -6,6 +6,9 @@ const authResolvers = {
       return {
         signIn: (payload: SignInPayload, context: AppContext): SignInBody => {
           return context.controllers.auth.signIn(payload)
+        },
+        signUp: ({ payload }: { payload: SignUpPayload }, context: AppContext): Promise<SignInBody> => {
+          return context.controllers.auth.signUp(payload)
         },
       }
     },

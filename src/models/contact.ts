@@ -7,18 +7,16 @@ import { User } from './user'
 @Entity()
 export class Contact extends Base {
   @ManyToOne((type) => User, (user) => user.contacts)
-  user: User;
+  public user: User;
 
-  @Column({
-    enum: lodash.values(ContactType),
-  })
-  type: string
+  @Column({ enum: lodash.values(ContactType) })
+  public type: string
 
   @Column()
-  contact: string
+  public contact: string
 
   @Column({
     default: false,
   })
-  verified: boolean
+  public verified: boolean
 }

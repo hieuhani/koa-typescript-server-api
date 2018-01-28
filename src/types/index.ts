@@ -1,3 +1,6 @@
+import { Controllers } from '../controllers'
+import { Repositories } from '../repositories'
+
 export enum ContactType {
   google = 'google',
   facebook = 'facebook',
@@ -6,9 +9,8 @@ export enum ContactType {
 }
 
 export interface AppContext {
-  controllers: {
-    [key: string]: any,
-  }
+  repositories: Repositories,
+  controllers: Controllers,
 }
 
 export interface SignInPayload {
@@ -16,6 +18,24 @@ export interface SignInPayload {
   password: string,
 }
 
+export interface SignUpPayload {
+  firstName: string,
+  lastName: string,
+  contact: string,
+  password: string,
+  type: ContactType,
+}
+
 export interface SignInBody {
   token: string,
+}
+
+export interface JwtToken {
+  userId: string,
+  contactId: string,
+}
+
+export {
+  Controllers,
+  Repositories,
 }

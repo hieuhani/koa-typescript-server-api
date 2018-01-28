@@ -5,14 +5,14 @@ import { Contact } from './contact'
 @Entity()
 export class User extends Base {
   @Column()
-  firstName: string
+  public firstName: string
 
   @Column()
-  lastName: string
-
-  @Column()
-  passwordHash: string
+  public lastName: string
 
   @OneToMany((type) => Contact, (contact) => contact.user)
-  contacts: Contact[];
+  public contacts: Contact[];
+
+  @Column()
+  public passwordHash: string
 }
