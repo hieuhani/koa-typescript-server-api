@@ -8,6 +8,12 @@ export enum ContactType {
   email = 'email',
 }
 
+export enum UserRole {
+  Banned = 0,
+  Normal = 1,
+  Administrator = 8,
+}
+
 export interface AppContext {
   repositories: Repositories,
   controllers: Controllers,
