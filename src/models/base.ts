@@ -2,11 +2,11 @@ import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'type
 
 export class Base {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  public id: string
 
   @CreateDateColumn()
-  createdAt: Date
+  public createdAt: Date
 
   @UpdateDateColumn()
-  updatedAt: Date
+  public updatedAt: Date
 }

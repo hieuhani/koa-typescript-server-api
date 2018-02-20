@@ -16,9 +16,9 @@ export async function injectContext(ctx: Context, next: () => Promise<any>) {
 }
 
 export async function validateToken(ctx: Context, next: () => Promise<any>) {
-  const authHeader = ctx.headers.authorization
+  const authHeader = ctx.headers.authorization || ctx.query.token
   if (authHeader) {
-    const jwtToken = authHeader.split(' ')[1]
+    const jwtToken = authHeader
     const user = await ctx.state.appContext.controllers.auth.verifyToken(jwtToken)
     if (user) {
       ctx.state.currentUser = user
