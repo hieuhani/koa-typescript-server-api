@@ -1,14 +1,14 @@
-import { AppContext, SignInBody, SignInPayload, SignUpPayload } from '../../../types'
+import { GlobalContext, SignInBody, SignInPayload, SignUpPayload } from '../../../types'
 
 const authResolvers = {
   Mutation: {
     auth: () => {
       return {
-        signIn: ({ payload }: { payload: SignInPayload }, context: AppContext): Promise<SignInBody> => {
-          return context.controllers.auth.signIn(payload)
+        signIn: ({ payload }: { payload: SignInPayload }, context: GlobalContext): Promise<SignInBody> => {
+          return context.app.controllers.auth.signIn(payload)
         },
-        signUp: ({ payload }: { payload: SignUpPayload }, context: AppContext): Promise<SignInBody> => {
-          return context.controllers.auth.signUp(payload)
+        signUp: ({ payload }: { payload: SignUpPayload }, context: GlobalContext): Promise<SignInBody> => {
+          return context.app.controllers.auth.signUp(payload)
         },
       }
     },
