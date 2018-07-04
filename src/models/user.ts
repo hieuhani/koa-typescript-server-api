@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany } from 'typeorm'
 import { UserRole } from '../types'
 import { Base } from './base'
 import { Contact } from './contact'
@@ -17,7 +17,7 @@ export class User extends Base {
   public rolesMask: number
 
   @OneToMany((type) => Contact, (contact) => contact.user)
-  public contacts: Contact[];
+  public contacts: Contact[]
 
   @Column()
   public passwordHash: string

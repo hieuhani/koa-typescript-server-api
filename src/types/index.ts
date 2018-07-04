@@ -19,6 +19,10 @@ export interface AppContext {
   controllers: Controllers,
 }
 
+export interface GlobalContext {
+  app: AppContext,
+}
+
 export interface SignInPayload {
   account: string,
   password: string,
