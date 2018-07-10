@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { UserRole } from '../types'
 import { Base } from './base'
 import { Contact } from './contact'

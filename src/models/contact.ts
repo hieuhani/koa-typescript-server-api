@@ -1,5 +1,5 @@
 import * as lodash from 'lodash'
-import { Column, Entity, ManyToOne } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { ContactType } from '../types'
 import { Base } from './base'
 import { User } from './user'

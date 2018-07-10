@@ -21,7 +21,8 @@ const config: IConfig = {
     entities: [
       `${__dirname}/models/*.ts`,
     ],
-    synchronize: false,
+    logging: true,
+    // synchronize: true,
   },
   jwtSecret: process.env.JWT_SECRET,
 }

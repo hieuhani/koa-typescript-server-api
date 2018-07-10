@@ -85,7 +85,7 @@ export default class AuthController extends BaseController {
     try {
       const decodedToken = verify(jwtToken, config.jwtSecret) as JwtToken
       const userRepository = this.appContext.repositories.user
-      return userRepository.findOneById(decodedToken.userId)
+      return userRepository.findOne(decodedToken.userId)
     } catch (err) {
       throw err
     }
