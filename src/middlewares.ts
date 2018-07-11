@@ -18,9 +18,13 @@ export function injectContext(options: InjectContextOptions) {
 }
 
 export async function validateToken(ctx: Context, next: () => Promise<any>) {
-  const authHeader = ctx.headers.authorization || ctx.query.token
-  if (authHeader) {
-    const jwtToken = authHeader
+  let jwtToken
+  if (ctx.headers.authorization && ctx.headers.authorization.split(' ')[0] === 'Bearer') {
+    jwtToken = ctx.headers.authorization.split(' ')[1]
+  } else if (ctx.query && ctx.query.token) {
+    jwtToken = ctx.query.token
+  }
+  if (jwtToken) {
     const user = await ctx.state.appContext.controllers.auth.verifyToken(jwtToken)
     if (user) {
       AppCache.put('currentUser', user)
