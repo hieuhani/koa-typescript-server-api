@@ -10,7 +10,6 @@ type User {
   firstName: String!
   lastName: String!
   contacts: [Contact]
-  roles: [String]
 }
 
 type Metadata {

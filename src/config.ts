@@ -22,7 +22,7 @@ const config: IConfig = {
       `${__dirname}/models/*.ts`,
     ],
     logging: true,
-    // synchronize: true,
+    synchronize: true,
   },
   jwtSecret: process.env.JWT_SECRET,
 }
