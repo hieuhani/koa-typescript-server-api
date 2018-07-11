@@ -1,4 +1,7 @@
+import { Connection } from 'typeorm'
+import GlobalContext from '../Context'
 import { Controllers } from '../controllers'
+import { User } from '../models/user'
 import { Repositories } from '../repositories'
 
 export enum ContactType {
@@ -8,19 +11,10 @@ export enum ContactType {
   email = 'email',
 }
 
-export enum UserRole {
-  Banned = 0,
-  Normal = 1,
-  Administrator = 8,
-}
-
 export interface AppContext {
   repositories: Repositories,
   controllers: Controllers,
-}
-
-export interface GlobalContext {
-  app: AppContext,
+  connection: Connection,
 }
 
 export interface SignInPayload {
@@ -36,8 +30,16 @@ export interface SignUpPayload {
   type: ContactType,
 }
 
+export interface InjectContextOptions {
+  connection: Connection,
+}
+
 export interface SignInBody {
   token: string,
+}
+
+export interface Metadata {
+  user: User,
 }
 
 export interface JwtToken {
@@ -48,4 +50,6 @@ export interface JwtToken {
 export {
   Controllers,
   Repositories,
+  User,
+  GlobalContext,
 }

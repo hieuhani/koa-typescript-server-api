@@ -4,10 +4,10 @@ type SignInBody {
 }
 
 enum ContactType {
-  GOOGLE
-  FACEBOOK
-  PHONE
-  EMAIL
+  google
+  facebook
+  phone
+  email
 }
 
 input SignUpPayload {
@@ -15,7 +15,6 @@ input SignUpPayload {
   lastName: String!,
   contact: String!,
   password: String!,
-  type: ContactType,
 }
 
 input SignInPayload {

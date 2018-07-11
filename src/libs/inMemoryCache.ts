@@ -24,7 +24,7 @@ export class InMemoryCache {
 
   public put(key: string, value: any): void {
     const ttl = (this.ttl < 0 || isNaN(this.ttl)) ? this.ttl : NaN
-    const record = {
+    const record: any = {
       value,
       expire: Date.now() + ttl,
     }
